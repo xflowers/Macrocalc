@@ -1,0 +1,99 @@
+import math
+from re import X
+# Xavier Flowers
+# This is a calculator that will calculate your estimated calories and macros nutrutrients. 
+# Calories and macros can be selected based on goals. Bulk, cut, or maintain 
+
+
+def mymacro():
+    #Getting user information 
+    name = input("what is your name? ")
+    gender  = input ("what is your born gender? ")
+    age = int(input("how old are you? "))
+    weight = float(input ("how much do you weigh? "))
+    weight_kg = weight / 2.20462                                      #Weight in Kilograms 
+    height = int(input ("How tall are you in inches? "))
+    height_cm = height * 2.54                                         #Height in Centimeters 
+    activity_lvl = float(input("From a range of 1.2 (least active outisde of training. ex. Desk Job) to 2.2 (very active outside of training. ex. Contruction worker) "))
+    body_fat = int(input("what is your approximate body fat percentage "))
+    body_fat_perc = body_fat/100 
+    choice = input ("Type bulk for gaining weight, cut for loosing weight, and maintain for maintaing weight ")
+
+    # Calculations for input goals and data 
+    lean_body_mass = weight - (weight * body_fat_perc) #Calculation for lean body mass for BMR calculation 
+
+    # Calulations based on gender 
+    protein = 0
+    carbs = 0
+    fat = 0
+    if gender == 'male':               
+        bmr = 10*weight_kg+6.25*height_cm-5*age+5
+        maint_cals = bmr * activity_lvl 
+        if choice == 'cut':
+            cut_cals = maint_cals - maint_cals * 0.15
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (cut_cals * 0.26)/9
+            carbs = (cut_cals-(fat*9)-(protein*4))/4
+            print("Your Cut calories are ", round(cut_cals,0))
+            print("Your macronutruient target for your cut is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+            
+        elif choice == 'bulk':
+            bulk_cals = maint_cals + maint_cals * 0.2
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (bulk_cals * 0.26)/9
+            carbs = (bulk_cals-(fat*9)-(protein*4))/4
+            print("Your bulk calories are ", round(bulk_cals,0))
+            print("Your macronutruient target for your bulk is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+        else:
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (maint_cals * 0.26)/9
+            carbs = (maint_cals-(fat*9)-(protein*4))/4
+            print("Your maintenance calories are ", round(maint_cals,0))
+            print("Your macronutruient target for your maintenance is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+    elif gender == 'female':
+        bmr = 10*weight_kg+6.25*height_cm-5*age-161
+        maint_cals = bmr * activity_lvl 
+        if choice == 'cut':
+            cut_cals = maint_cals - maint_cals * 0.15
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (cut_cals * 0.26)/9
+            carbs = (cut_cals-(fat*9)-(protein*4))/4
+            print("Your Cut calories are ", round(cut_cals,0))
+            print("Your macronutruient target for your cut is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+            
+        elif choice == 'bulk':
+            bulk_cals = maint_cals + maint_cals * 0.2
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (bulk_cals * 0.26)/9
+            carbs = (bulk_cals-(fat*9)-(protein*4))/4
+            print("Your bulk calories are ", round(bulk_cals,0))
+            print("Your macronutruient target for your bulk is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+        else:
+            protein = 1.4*lean_body_mass
+            if protein > 200:
+                protein = 200
+            fat = (maint_cals * 0.26)/9
+            carbs = (maint_cals-(fat*9)-(protein*4))/4
+            print("Your maintenance calories are ", round(maint_cals,0))
+            print("Your macronutruient target for your maintenance is", "Protein:", round(protein,0),"g,", "Fat:",round(fat,0),"g","Carbs:",round(carbs,0),"g per day")
+    else:
+        return("Error, please choose male or female")
+
+
+mymacro()
+    
+
+
+
+
+
